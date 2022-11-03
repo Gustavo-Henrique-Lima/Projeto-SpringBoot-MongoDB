@@ -1,6 +1,7 @@
 package com.gustavohenrique.recursos;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.gustavohenrique.dominio.Usuario;
+import com.gustavohenrique.dto.UsuarioDTO;
 import com.gustavohenrique.servicos.ServicosUsuario;
 
 @RestController
@@ -19,9 +21,10 @@ public class RecursosUsuario {
 		private ServicosUsuario usuarioServ;
 		
 		@GetMapping
-		public ResponseEntity<List<Usuario>> novo()
+		public ResponseEntity<List<UsuarioDTO>> novo()
 		{
 			List<Usuario> list=usuarioServ.findall();
-			return ResponseEntity.ok().body(list);
+			List<UsuarioDTO> listDto=list.stream().map(x->new UsuarioDTO(x)).collect(Collectors.toList());
+			return ResponseEntity.ok().body(listDto);
 		}
 }
