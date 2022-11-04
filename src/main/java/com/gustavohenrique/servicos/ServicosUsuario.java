@@ -37,4 +37,10 @@ public class ServicosUsuario {
 	{
 		return new Usuario(obj.getId(), obj.getNome(), obj.getEmail());
 	}
+	
+	public void delete(String id)
+	{
+		findById(id);
+		userRepo.deleteById(id);
+	}
 }
