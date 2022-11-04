@@ -33,14 +33,27 @@ public class ServicosUsuario {
 		return userRepo.insert(obj);
 	}
 	
-	public Usuario fromDTO(UsuarioDTO obj)
-	{
-		return new Usuario(obj.getId(), obj.getNome(), obj.getEmail());
-	}
-	
 	public void delete(String id)
 	{
 		findById(id);
 		userRepo.deleteById(id);
+	}
+	
+	public Usuario update(Usuario obj)
+	{
+		Usuario newObj=findById(obj.getId());
+		updateData(newObj,obj);
+		return userRepo.save(newObj);
+	}
+
+	private void updateData(Usuario newObj, Usuario obj) 
+	{
+		newObj.setNome(obj.getNome());
+		newObj.setNome(obj.getNome());
+	}
+	
+	public Usuario fromDTO(UsuarioDTO obj)
+	{
+		return new Usuario(obj.getId(), obj.getNome(), obj.getEmail());
 	}
 }
