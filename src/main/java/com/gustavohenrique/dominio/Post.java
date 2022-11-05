@@ -1,13 +1,16 @@
 package com.gustavohenrique.dominio;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.gustavohenrique.dto.AutorDTO;
+import com.gustavohenrique.dto.ComentarioDTO;
 
 @Document
 public class Post implements Serializable{
@@ -20,6 +23,7 @@ public class Post implements Serializable{
 	private String titulo;
 	private String corpo;
 	private AutorDTO autor;
+	private List<ComentarioDTO> comentarios=new ArrayList<>();
 	
 	public Post(){
 	}
@@ -82,6 +86,16 @@ public class Post implements Serializable{
 	public void AutorDTO(AutorDTO autor) 
 	{
 		this.autor = autor;
+	}
+
+	public List<ComentarioDTO> getComentarios() 
+	{
+		return comentarios;
+	}
+
+	public void setComentarios(List<ComentarioDTO> comentarios) 
+	{
+		this.comentarios = comentarios;
 	}
 
 	@Override
