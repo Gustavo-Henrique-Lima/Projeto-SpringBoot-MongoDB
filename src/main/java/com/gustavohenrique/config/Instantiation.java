@@ -39,7 +39,7 @@ public class Instantiation implements CommandLineRunner{
 		usuarioRep.saveAll(Arrays.asList(maria,alex,bob));
 		
 		Post p1=new Post(null,fdate.parse("21/03/2018"),"Partiu viagem","Vou viajar pra São Paulo",new AutorDTO(maria));
-		Post p2=new Post(null,fdate.parse("05/11/2022"),"Choveu bastante ontem","Muita bhuca!!",new AutorDTO(maria));
+		Post p2=new Post(null,fdate.parse("05/11/2022"),"Choveu bastante ontem","Muita chuva!!",new AutorDTO(maria));
 		
 		postRep.saveAll(Arrays.asList(p1,p2));
 		
