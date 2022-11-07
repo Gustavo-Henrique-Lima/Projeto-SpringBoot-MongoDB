@@ -26,4 +26,9 @@ public class ServicosPost {
 		Optional<Post> obj =postRepo.findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
 	}
+	
+	public List<Post> finByTitulo(String texto)
+	{
+		return postRepo.findByTituloContainingIgnoreCase(texto);
+	}
 }
