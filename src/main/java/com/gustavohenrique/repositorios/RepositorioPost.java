@@ -1,5 +1,6 @@
 package com.gustavohenrique.repositorios;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.mongodb.repository.MongoRepository;
@@ -13,4 +14,7 @@ public interface RepositorioPost extends MongoRepository<Post, String>{
 	
 	@Query("{'titulo':{$regex:?0,$options:'i'}}")
 	List<Post> findByTitle(String texto);
+	
+	@Query("{ $and: [ { data: {$gte: ?1} }, { data: { $lte: ?2} } , { $or: [ { 'titulo': { $regex: ?0, $options: 'i' } }, { 'corpo': { $regex: ?0, $options: 'i' } }, { 'comentarios.texto': { $regex: ?0, $options: 'i' } } ] } ] }")
+	List<Post> fullSearch(String texto, Date minDate,Date maxDate);
 }

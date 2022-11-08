@@ -1,5 +1,6 @@
 package com.gustavohenrique.recursos;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,4 +43,17 @@ public class RecursosPost {
 			List<Post> list=postServ.finByTitulo(texto);
 			return ResponseEntity.ok().body(list);
 		}
+		
+		@GetMapping(value="/fullsearch")
+		public ResponseEntity<List<Post>> fullSearch(
+				@RequestParam(value="texto",defaultValue = "") String texto,
+				@RequestParam(value="minData",defaultValue = "") String minData,
+				@RequestParam(value="maxData",defaultValue = "") String maxData)
+		{
+			texto=URL.decodeParam(texto);
+			Date min=URL.converterData(minData,new Date(0L));
+			Date max=URL.converterData(maxData,new Date(0L));
+			List<Post> list=postServ.fullSearch(texto, min, max);
+			return ResponseEntity.ok().body(list);
+		}	
 }

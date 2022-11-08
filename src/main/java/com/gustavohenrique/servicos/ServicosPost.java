@@ -1,5 +1,6 @@
 package com.gustavohenrique.servicos;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,5 +31,11 @@ public class ServicosPost {
 	public List<Post> finByTitulo(String texto)
 	{
 		return postRepo.findByTitle(texto);
+	}
+	
+	public List<Post> fullSearch(String texto, Date minData,Date maxData)
+	{
+		maxData=new Date(maxData.getTime()+24*60*1000);
+		return postRepo.fullSearch(texto, minData, maxData);
 	}
 }
